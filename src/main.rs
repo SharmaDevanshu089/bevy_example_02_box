@@ -1,4 +1,4 @@
-use bevy::{prelude::*, sprite};
+use bevy::prelude::*;
 
 fn main() {
     //Main Loader for bevy
@@ -10,18 +10,14 @@ fn main() {
 
 fn SpawnCamera(mut commands: Commands) {
     // This will spawn camera at 1000 z axis
+    commands.spawn((Camera2d, Transform::from_xyz(0.0, 0.0, 1000.0)));
+
     commands.spawn((
-        Camera2d,
-        Transform::from_xyz(0.0, 0.0, 1000.0),
-        GlobalTransform::default(),
-    ));
-    commands.spawn(SpriteBundle {
-        sprite: Sprite {
-            color: Color::hsl(0.2, 0.3, 0.7),
-            custom_size: Some(Vec2::new(120.0, 80.0)),
+        Sprite {
+            custom_size: Some(Vec2::new(100.0, 100.0)),
+            color: Color::hsl(210.0, 0.4, 0.3),
             ..default()
         },
-        transform: Transform::from_xyz(0.0, 0.0, 0.0),
-        ..default()
-    });
+        Transform::from_xyz(0.0, 0.0, 0.0),
+    ));
 }
