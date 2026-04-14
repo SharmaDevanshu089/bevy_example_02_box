@@ -1,4 +1,4 @@
-use bevy::{prelude::*, sprite};
+use bevy::{ecs::query, prelude::*, sprite};
 
 #[derive(Component)]
 struct SubjectBox;
@@ -25,6 +25,15 @@ fn SpawnCamera(mut commands: Commands) {
         Transform::from_xyz(0.0, 0.0, 0.0),
         SubjectBox,
     ));
+}
+
+fn change_size_after_pressing_key(
+    key: Res<ButtonInput<KeyCode>>,
+    mut query: Query<&mut Sprite, With<SubjectBox>>,
+) {
+    if key.pressed(KeyCode::A) {
+        println!("Up Pressed");
+    }
 }
 
 fn change_color_after_ten_seconds(
