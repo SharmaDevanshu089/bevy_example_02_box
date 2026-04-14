@@ -1,4 +1,4 @@
-use bevy::{ecs::query, prelude::*, sprite};
+use bevy::{ecs::query, input::keyboard::Key, prelude::*, sprite};
 
 #[derive(Component)]
 struct SubjectBox;
@@ -8,6 +8,7 @@ fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
         .add_systems(Startup, SpawnCamera)
+        .add_systems(Update, change_size_after_pressing_key)
         .add_systems(Update, change_color_after_ten_seconds)
         .run();
 }
@@ -31,8 +32,25 @@ fn change_size_after_pressing_key(
     key: Res<ButtonInput<KeyCode>>,
     mut query: Query<&mut Sprite, With<SubjectBox>>,
 ) {
-    if key.pressed(KeyCode::A) {
-        println!("Up Pressed");
+    if key.pressed(KeyCode::KeyA) {
+        for mut sprite in &mut query {
+            sprite.color = Color::hsl(50.0, 0.5, 0.3);
+        }
+    }
+    if key.pressed(KeyCode::KeyS) {
+        for mut sprite in &mut query {
+            sprite.color = Color::hsl(10.0, 0.5, 0.7);
+        }
+    }
+    if key.pressed(KeyCode::KeyD) {
+        for mut sprite in &mut query {
+            sprite.color = Color::hsl(150.0, 0.5, 0.3);
+        }
+    }
+    if key.pressed(KeyCode::KeyW) {
+        for mut sprite in &mut query {
+            sprite.color = Color::hsl(210.0, 0.5, 0.9);
+        }
     }
 }
 
