@@ -1,4 +1,4 @@
-use bevy::prelude::*;
+use bevy::{prelude::*, sprite};
 
 #[derive(Component)]
 struct SubjectBox;
@@ -32,6 +32,8 @@ fn change_color_after_ten_seconds(
     mut query: Query<&mut Sprite, With<SubjectBox>>,
 ) {
     if time.elapsed_secs() > 10.0 {
-        println!("time has been changed");
+        for mut sprite in &mut query {
+            sprite.color = Color::hsl(50.0, 0.5, 0.3);
+        }
     }
 }
